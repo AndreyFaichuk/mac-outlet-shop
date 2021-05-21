@@ -1,3 +1,13 @@
+@media screen and (max-width: 1305px) {
+
+    .wrapper{
+        justify-content: space-evenly;
+    }
+
+
+}
+
+
 
 @media screen and (max-width: 1105px) {
     .search {
@@ -21,6 +31,8 @@
         margin:15px;
     }
 }
+
+
 
 
 @media screen and (max-width: 870px) {
