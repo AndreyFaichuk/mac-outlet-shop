@@ -10,6 +10,29 @@
 
 
 @media screen and (max-width: 1105px) {
+    .modal .modal_container .modal_info .card_1_bottom{
+        margin: 0 7px 0 7px;
+    }
+
+
+    .slider{
+        width: 120%;
+    }
+
+    .ipad{
+        width: 780px;
+    }
+
+    .ipad img{
+       height: 480px;
+
+    }
+
+    .ipad h1{
+        font-size: 53px;
+        margin: -72px 0 0 0;
+    }
+
     .search {
         width: 782px;
         height: 60px;
@@ -37,6 +60,49 @@
 
 @media screen and (max-width: 870px) {
 
+    .back_to_top{
+        left: 27px;
+    }
+
+    .modal .modal_container .infoAboutItem li{
+        margin: -7px 0 0 15px;
+    }
+
+    .modal .modal_container .modal_image img {
+        height: 175px;
+    }
+
+    .modal .modal_container .modal_info .card_1_bottom{
+        width: 287px;
+    }
+
+    .modal .modal_priceAndButton .modalButton {
+        padding: 12px 10px;
+        font-size: 23px;
+    }
+
+    .ipad .button_top_ipad{
+        font-size: 15px;
+    }
+
+    .slider{
+        width: 120%;
+    }
+
+    .ipad{
+        width: 680px;
+    }
+
+    .ipad img{
+        height: 400px;
+
+    }
+
+    .ipad h1{
+        font-size: 36px;
+        margin: -72px 0 0 0;
+    }
+
     html, body {
         margin: 0;
         padding: 0;
@@ -47,11 +113,6 @@
         height: 430px;
     }
 
-    .top_menu .ipad h1 {
-        font-size: 70px;
-        font-weight: 300;
-        margin: -40px 0 0 0;
-    }
 
     .top_menu .outlet {
         width: 140px;
@@ -99,3 +160,13 @@
     }
 }
 
+@media screen and (max-width: 750px) {
+    .ipad img{
+        height: 350px;
+    }
+
+
+    .back_to_top{
+        left: 5px;
+    }
+}

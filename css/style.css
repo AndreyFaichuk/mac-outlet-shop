@@ -1,6 +1,17 @@
 * {
   box-sizing: border-box;
 }
+* html {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
 
 ::-webkit-scrollbar {
   display: none;
@@ -19,44 +30,60 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
-  max-width: 100%;
-  min-height: 570px;
 }
-.top_menu .outlet {
-  max-width: 122px;
-  max-height: 36px;
-  margin: 0 256px 50px 0;
+
+.outlet {
+  max-width: 70%;
+  display: flex;
+  justify-content: center;
 }
-.top_menu .ipad {
+.outlet img {
+  margin: 10px 0 10px 0;
+}
+
+.ipad {
   position: relative;
+  display: flex;
+  justify-content: center;
+  margin: 15px;
 }
-.top_menu .ipad img {
+.ipad img {
   height: 555px;
 }
-.top_menu .ipad h1 {
+.ipad h1 {
   font-family: inherit;
   position: absolute;
   top: 185px;
   color: black;
-  font-size: 81px;
+  font-size: 50px;
   font-weight: 400;
   margin: -40px 0 0 0;
+  padding: 0 0 0 26px;
 }
-.top_menu .ipad .button_top_ipad {
+.ipad h3 {
+  font-weight: inherit;
+  font-size: 35px;
+  padding: 0 0 0 26px;
+}
+.ipad .button_top_ipad {
   background-color: #0E49B5;
   border: none;
   border-radius: 8px;
   position: absolute;
-  bottom: 15px;
-  left: 273px;
+  bottom: 53px;
   color: white;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 19px;
-  margin: 15px 0px -20px 0;
+  margin: 15px 0px -20px 26px;
   cursor: pointer;
+}
+
+.buttonSliderWrapper {
+  display: flex;
+  justify-content: space-between;
 }
 
 .search {
@@ -347,10 +374,11 @@ body {
   align-items: center;
 }
 .modal .modal_container {
-  width: 1025px;
+  max-width: 90%;
   height: 500px;
   background-color: #ffff;
   display: flex;
+  margin: 0 -15px 0 0;
 }
 .modal .modal_container .modal_image {
   display: flex;
@@ -361,7 +389,7 @@ body {
   border-right: 1px solid black;
 }
 .modal .modal_container .modal_image img {
-  height: 210px;
+  height: 200px;
 }
 .modal .modal_container .modal_info {
   width: 441px;
@@ -493,6 +521,28 @@ body {
 label:hover {
   color: #0E49B5;
   background: rgba(0, 0, 0, 0);
+}
+
+.back_to_top {
+  position: fixed;
+  left: 50px;
+  bottom: 100px;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 30px;
+  background: #DAE2EA;
+  cursor: pointer;
+  border-radius: 10px;
+  display: none;
+}
+
+.back_to_top:hover {
+  background: #e9ebec;
+}
+
+.back_to_top-show {
+  display: block;
 }
 
 .hidden {
