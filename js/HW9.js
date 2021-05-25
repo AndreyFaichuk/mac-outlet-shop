@@ -133,93 +133,93 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 
-    const renderCardOfItem = item => {
-
-        const divElem = document.createElement('div')
-        divElem.className = 'card_1'
-
-        const button = document.createElement('button')    /*добавляем кнопку*/
-        button.className = 'button_card_1'
-        button.innerText = 'Read more info'
-
-        if (item.orderInfo.inStock === 0) button.setAttribute('class', 'button_card_1_disabled')
-
-        const image = document.createElement('img')
-        image.setAttribute('src', `${item.imgUrl}`)  /*добавляем изображение*/
-        image.className = '.image_wrap img'
-
-        const imageHeart = document.createElement('img')
-        imageHeart.setAttribute('src', "img/icons/like_empty.svg")   /*добавляем верхнюю кнопку*/
-        imageHeart.className = '.card_1 button[type=submit]'
-
-
-        divElem.innerHTML = `
-        <button type="submit"></button>
-
-        <div class="image_wrap">
-
-
-            <h1>${item.name}</h1>
-
-             <div class="checkk">
-                <img src="${item.stockPage}" alt="pic">
-            <p class="check"> <span class="amount">${item.orderInfo.inStock}</span> left in stock</p>
-            </div>
-            <div class="butt_wrapper">
-             <p class="price">Price: <span class="price">${item.price}</span> $</p>
-             </div>
-
-
-          </div>
-
-         <div class="card_1_bottom">
-            <div class="avarageWrapper">
-            <p class="views"> <span class="rating">${item.orderInfo.reviews}%</span> Positive reviews</p>
-                <span class="aboveAvarage">Above avarage</span>
-            </div>
-                <div class="amountOfOrdersWrapper">
-                <span class="amountOfOrders">${item.orderInfo.orders}</span>
-                    <p class="orders"> orders</p>
-                </div>
-
-        </div>
-    `
-
-        let buttonType = divElem.querySelector('button[type=submit]')
-        buttonType.prepend(imageHeart)
-
-        let imageWrap = divElem.querySelector('.image_wrap ')
-        imageWrap.prepend(image)
-
-        let wrap = divElem.querySelector('.butt_wrapper')
-        wrap.append(button)
-
-
-        buttonType.addEventListener('click', function () {
-            item.isFavorite = !item.isFavorite
-
-            imageHeart.setAttribute('src', `img/icons/${item.isFavorite ? 'heart.svg' : 'like_empty.svg'}`)
-        })
-
-        button.onclick = function () {
-            showModal(item)
-           goTopBtn.className = 'back_to_top'
-        }
-
-        return divElem
-    }
-
-
-    const renderCards = newObjOfItems => {
-        const containerElem = document.querySelector('.wrapper')
-
-        newObjOfItems.forEach(item => {
-            const card = renderCardOfItem(item)
-            containerElem.appendChild(card)
-        })
-    }
-
-    renderCards(newObjOfItems)
+    // const renderCardOfItem = item => {
+    //
+    //     const divElem = document.createElement('div')
+    //     divElem.className = 'card_1'
+    //
+    //     const button = document.createElement('button')    /*добавляем кнопку*/
+    //     button.className = 'button_card_1'
+    //     button.innerText = 'Read more info'
+    //
+    //     if (item.orderInfo.inStock === 0) button.setAttribute('class', 'button_card_1_disabled')
+    //
+    //     const image = document.createElement('img')
+    //     image.setAttribute('src', `${item.imgUrl}`)  /*добавляем изображение*/
+    //     image.className = '.image_wrap img'
+    //
+    //     const imageHeart = document.createElement('img')
+    //     imageHeart.setAttribute('src', "img/icons/like_empty.svg")   /*добавляем верхнюю кнопку*/
+    //     imageHeart.className = '.card_1 button[type=submit]'
+    //
+    //
+    //     divElem.innerHTML = `
+    //     <button type="submit"></button>
+    //
+    //     <div class="image_wrap">
+    //
+    //
+    //         <h1>${item.name}</h1>
+    //
+    //          <div class="checkk">
+    //             <img src="${item.stockPage}" alt="pic">
+    //         <p class="check"> <span class="amount">${item.orderInfo.inStock}</span> left in stock</p>
+    //         </div>
+    //         <div class="butt_wrapper">
+    //          <p class="price">Price: <span class="price">${item.price}</span> $</p>
+    //          </div>
+    //
+    //
+    //       </div>
+    //
+    //      <div class="card_1_bottom">
+    //         <div class="avarageWrapper">
+    //         <p class="views"> <span class="rating">${item.orderInfo.reviews}%</span> Positive reviews</p>
+    //             <span class="aboveAvarage">Above avarage</span>
+    //         </div>
+    //             <div class="amountOfOrdersWrapper">
+    //             <span class="amountOfOrders">${item.orderInfo.orders}</span>
+    //                 <p class="orders"> orders</p>
+    //             </div>
+    //
+    //     </div>
+    // `
+    //
+    //     let buttonType = divElem.querySelector('button[type=submit]')
+    //     buttonType.prepend(imageHeart)
+    //
+    //     let imageWrap = divElem.querySelector('.image_wrap ')
+    //     imageWrap.prepend(image)
+    //
+    //     let wrap = divElem.querySelector('.butt_wrapper')
+    //     wrap.append(button)
+    //
+    //
+    //     buttonType.addEventListener('click', function () {
+    //         item.isFavorite = !item.isFavorite
+    //
+    //         imageHeart.setAttribute('src', `img/icons/${item.isFavorite ? 'heart.svg' : 'like_empty.svg'}`)
+    //     })
+    //
+    //     button.onclick = function () {
+    //         showModal(item)
+    //        goTopBtn.className = 'back_to_top'
+    //     }
+    //
+    //     return divElem
+    // }
+    //
+    //
+    // const renderCards = newObjOfItems => {
+    //     const containerElem = document.querySelector('.wrapper')
+    //
+    //     newObjOfItems.forEach(item => {
+    //         const card = renderCardOfItem(item)
+    //         containerElem.appendChild(card)
+    //     })
+    // }
+    //
+    // renderCards(newObjOfItems)
 
     function accordionShowOrHideElements() {
         let imgArrow1 = document.querySelector('#imgArr1'),

@@ -269,7 +269,6 @@ $borderLine:  none
   box-shadow: $borderShadow
   border-radius: $borderRadius
   margin: 20px 35px 0 35px
-  transition: 0.3s all cubic-bezier(0.85, 0.11, 0.58, 1)
   .accord_button
     display: flex
     justify-content: space-between
@@ -292,7 +291,6 @@ $borderLine:  none
     align-content: space-around
     justify-content: center
     list-style-type: none
-    transition: 0.3s all cubic-bezier(0.85, 0.11, 0.58, 1)
     .price-filter__item
       margin: 10px 0 10px 0
       display: flex
@@ -301,25 +299,57 @@ $borderLine:  none
       flex-wrap: wrap
       flex-direction: column
   .accord_down_body
-    .checkbox-row2
-      flex-direction: column
-      display: flex
-      padding: 0 0 0 20px
-      transition: 0.3s all cubic-bezier(0.85, 0.11, 0.58, 1)
     .checkbox
       padding: 5px
       margin: 5px
     .checkbox-row
       display: flex
       justify-content: space-evenly
-      margin: 15px 0 10px -20px
+      margin: 15px 0 15px -20px
       padding: 5px 20px 0 0
-      transition: 0.3s all cubic-bezier(0.85, 0.11, 0.58, 1)
       .checkbox
         padding: 5px
   .price-filter__item input
     width: 180px
     height: 35px
+
+.checkbox-column1
+  display: flex
+  flex-direction: column
+  align-items: flex-end
+  label
+    padding-top: 10px
+
+.checkboxOs
+  display: flex
+  flex-direction: column
+  align-items: flex-end
+  margin: 10px 60px 12px 0
+  label
+    padding-top: 10px
+
+
+.checkbox-column3
+  display: flex
+  flex-direction: column
+  align-items: flex-end
+  label
+    padding-top: 10px
+
+.checkbox-row4
+  display: flex
+  flex-direction: column
+  align-items: flex-end
+  flex-wrap: wrap
+  align-content: center
+  margin: 10px 0 10px 0
+  label
+    padding: 5px 0 5px 0
+
+
+
+
+
 
 
 .main
@@ -497,5 +527,3 @@ label:hover
 
 .img_rotate
   transform: rotate(90deg)
-
-
