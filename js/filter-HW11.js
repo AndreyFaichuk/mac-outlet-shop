@@ -3,7 +3,7 @@ let newObjOfItems = JSON.parse(JSON.stringify(items))
 for (let i = 0; i < newObjOfItems.length; i++) {
     newObjOfItems[i].orderInfo.orders = i + 6  /*добавляем новое свойство: количество заказов товара*/
     newObjOfItems[i].stockPage = "img/icons/check.svg"
-
+    newObjOfItems[i].count = 0
     if (newObjOfItems[i].os === null) newObjOfItems[i].os = "none"
     if (newObjOfItems[i].chip.cores === null) newObjOfItems[i].chip.cores = "no information given"
     if (newObjOfItems[i].chip.name === 'H!') newObjOfItems[i].chip.name = "no information given"
@@ -16,6 +16,151 @@ for (let i = 0; i < newObjOfItems.length; i++) {
     if(newObjOfItems[i].storage === null) newObjOfItems[i].storage = 'none'
     if(newObjOfItems[i].storage === 22.1654) newObjOfItems[i].storage = 2048
     if(newObjOfItems[i].display === null) newObjOfItems[i].display = 'none'
+}
+
+const cartTotal = {
+    items: [],
+    totalItems: 0,
+    totalPrice: 0,
+}
+
+const title = document.querySelector('.buttonCart span')
+const totalPrice = document.querySelector('.totalAmountAndTotalPrice')
+const price = totalPrice.querySelector('p .price')
+const amount = totalPrice.querySelector('p span')
+
+
+price.innerText = `$0`
+amount.innerText = `0`
+title.innerText = `0`
+
+
+
+const getLocalStorage = function(){
+    return JSON.parse(localStorage.getItem('items'))
+}
+
+const setLocalStorage = function(){
+    localStorage.setItem('items', JSON.stringify(cartTotal))
+}
+
+
+
+const addToCart = (item, classname) => {
+    const itemIncart = cartTotal.items.find(itemInCart => itemInCart.id === item.id)
+    if(!itemIncart){
+        cartTotal.items.push ({
+            id: item.id,
+            data: item,
+            amount: 1,
+        })
+    }
+     else if (classname === 'more') itemIncart.amount < 4 && itemIncart.amount++
+     else if (classname === 'less') itemIncart.amount > 1 && itemIncart.amount--
+     else if (classname === 'delete'){
+
+        let removeItemIncart = cartTotal.items.findIndex(itemInCart => itemInCart.id === item.id)
+
+        cartTotal.items.splice(removeItemIncart,1)
+        itemInCart(cartTotal)
+    }
+
+
+    const totalParams = cartTotal.items.reduce((accum, item) => {
+
+        return {
+            totalItems: accum.totalItems + item.amount,
+            totalPrice: accum.totalPrice + (item.amount * item.data.price),
+        }
+
+    }, {totalItems: 0, totalPrice: 0})
+
+    Object.assign(cartTotal, totalParams)
+
+    setLocalStorage()
+
+    itemInCart(cartTotal)
+}
+
+
+
+const itemInCart = (arr) =>{
+    price.innerText = `$${arr.totalPrice}`
+    amount.innerText = `${arr.totalItems}`
+
+
+    const cartWrapper = document.querySelector('#cartContainer')
+    const amountOfitemsWrapper = cartWrapper.querySelector('.amountOfItems')
+    amountOfitemsWrapper.innerHTML = ''
+
+    title.innerText = `${arr.totalItems}`
+
+    arr.items.forEach(item => {
+
+    const lessButton = document.createElement('button')
+    lessButton.className = 'less'
+    lessButton.innerText = '<'
+
+    const moreButton = document.createElement('button')
+    moreButton.className = 'more'
+    moreButton.innerText = '>'
+
+    const deleteButton = document.createElement('button')
+    deleteButton.className = 'delete'
+    deleteButton.innerText = 'X'
+
+    const totalAmount = document.createElement('h4')
+    totalAmount.className = 'totalAmountOfItems'
+    totalAmount.innerText = `${item.amount}`
+
+    const items = document.createElement('div')
+    items.className = 'items'
+
+
+
+    items.innerHTML += `
+        <div class="itemInCart">
+        <img src="${item.data.imgUrl}" alt="pic">
+        <div class="nameAndPriceInfo">
+            <h1>${item.data.name}</h1>
+            <h4>$${item.data.price}</h4>
+        </div>
+        <div class="buttonsInCart"></div>
+    </div>
+        `
+
+
+
+
+    const buttonWraper = items.querySelector('.buttonsInCart')
+    buttonWraper.append(lessButton)
+    buttonWraper.append(totalAmount)
+    buttonWraper.append(moreButton)
+    buttonWraper.append(deleteButton)
+
+
+    amountOfitemsWrapper.append(items)
+
+        moreButton.addEventListener('click', () => {
+            addToCart(item,'more')
+        })
+
+        lessButton.addEventListener('click', () => {
+            addToCart(item, 'less')
+        })
+
+        if(item.amount === 4) moreButton.className = 'more_disabled'
+
+        if(item.amount === 1) lessButton.className = 'more_disabled'
+
+        deleteButton.addEventListener('click', () => {
+            addToCart(item, 'delete')
+        })
+
+
+    })
+
+
 }
 
 
@@ -45,6 +190,7 @@ const slider = item => {
     sliderButton.id = item.id
 
     sliderButton.onclick = function (){
+        cartContainer.className = 'hidden'
         showModal(item)
     }
 
@@ -64,16 +210,20 @@ renderSlide(newObjOfItems)
 
 
 const showModal = data => {
+    let progressBar = document.querySelector('.progressBar')
     const modal = document.querySelector('.modal')
     modal.onclick = (event) => {
         if (modal === event.target) {
             document.body.style.overflow = ''
+            progressBar.style.display = ''
+            goTopBtn.style.display = ''
             return modal.classList.remove('modal_active')
         }
     }
 
     modal.classList.add('modal_active')
     document.body.style.overflow = 'hidden'
+    progressBar.style.display = 'none'
 
     const buttonInModal = document.createElement('button')    /*добавляем кнопку в модальное окно*/
     buttonInModal.className = 'modalButton'
@@ -127,7 +277,12 @@ const showModal = data => {
 
     modalButton.onclick = (event) => {
         if (modalButton !== event.target && event.target.className === 'modalButton') {
-            console.log(modalButton.id)
+
+            addToCart(data, 'more')
+            document.body.style.overflow = ''
+            progressBar.style.display = ''
+            goTopBtn.style.display = ''
+            return modal.classList.remove('modal_active')
         }
     }
 
@@ -206,13 +361,15 @@ class Cards {
                 buttonType.prepend(imageHeart)
 
             buttonType.addEventListener('click', function () {
-                        item.isFavorite = !item.isFavorite
+                item.isFavorite = !item.isFavorite
                 imageHeart.setAttribute('src', `img/icons/${item.isFavorite ? 'heart.svg' : 'like_empty.svg'}`)
+
             })
 
             button.onclick = function () {
                 showModal(item)
-                goTopBtn.className = 'back_to_top'
+                goTopBtn.style.display = 'none'
+                cartContainer.className = 'hidden'
             }
         })
 
@@ -521,4 +678,36 @@ new Filters()
 
 const findService = new FindService()
 
+
+let buttonWraper = document.querySelector('.outlet')
+let cart = buttonWraper.querySelector('.buttonCart')
+let cartContainer = document.querySelector('#cartContainer')
+
+cart.addEventListener('click', function (e) {
+    if (cartContainer.className === 'hidden') {
+        cartContainer.className = 'cartContainer_active'
+    } else {
+        cartContainer.className = 'hidden'
+    }
+})
+
+
+let fullHeight
+let innerHeight
+let progressBar = document.querySelector('.progress_line')
+
+
+window.addEventListener('scroll', fillProgress)
+window.addEventListener('resize', fillProgress)
+
+function fillProgress() {
+    fullHeight =  document.body.scrollHeight
+    innerHeight = window.innerHeight
+    progressBar.style.width = (pageYOffset * 100 / (fullHeight - innerHeight)) + '%'
+}
+
+if(getLocalStorage){
+    let newItems = getLocalStorage()
+    itemInCart(newItems)
+}
 

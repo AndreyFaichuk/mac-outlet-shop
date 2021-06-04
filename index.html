@@ -15,10 +15,37 @@
 
 </head>
 <body>
+<div class="progressBar">
+    <div class="progress_line"></div>
+</div>
+
 
 <div class="outlet">
     <img src="img/banners/outlet.png" alt="pic"/>
+    <button type="button" class="buttonCart"><img src="img/icons/shopping-cart.svg" alt="pic"><span></span></button>
 </div>
+
+<div class="hidden" id="cartContainer">
+    <div class="shoppingStatus">
+        <h1>Shopping Cart</h1>
+        <p>Checkout is almost done!</p>
+    </div>
+
+    <div class="amountOfItems"></div>
+
+    <div class="totalAmountAndTotalPrice">
+        <p>Total amount: <span></span></p>
+        <p>Total price: <span class="price"></span></p>
+    </div>
+
+
+    <div class="finishBuyWrapper">
+        <button type="button" class="finishBuy">Buy</button>
+    </div>
+
+</div>
+
+
 
 
     <div class="sliderWrapper"></div>
@@ -182,7 +209,7 @@
 <script type="text/javascript" src="js/slider.js"></script>
 <script src="js/items.js"></script>
 <script src="js/HW9.js"></script>
-<script src="js/filter-HW10.js"></script>
+<script src="js/filter-HW11.js"></script>
 
 
 </body>

@@ -1,10 +1,10 @@
 *
   box-sizing: border-box
 
-  html
-    width: 100%
-    max-width: 100%
-    overflow-x: hidden
+html
+  width: 100%
+  max-width: 100%
+  margin: 0 0 0 -8px
 
 body
   width: 100%
@@ -22,7 +22,7 @@ body
   padding-right: 17px
   overflow: scroll
 
-$blue_color: #0E49B5
+$blue_color: #0a2f80
 $borderShadow: 0 0 20px rgb(0 0 0 / 18%)
 $borderRadius: 8px
 $borderLine:  none
@@ -36,9 +36,19 @@ $borderLine:  none
 .outlet
   max-width: 70%
   display: flex
-  justify-content: center
+  justify-content: space-between
+  margin: 0 auto
+
+.buttonCart
+  outline: none
+  border: 0
+  background: transparent
+  vertical-align: middle
+  width: 50px
+  height: 34px
   img
-    margin: 10px 0 10px 0
+    width: 33px
+    height: 43px
 
 .ipad
   position: relative
@@ -217,7 +227,7 @@ $borderLine:  none
       justify-content: space-around
       height: 87px
       background-color: #DAE2EA
-      margin: 36px 0 0 0
+      margin: 37px 0 0 0
       border-radius: 0 0 8px 8px
       .views
         font-family: inherit
@@ -372,7 +382,6 @@ $borderLine:  none
     height: 500px
     background-color: #ffff
     display: flex
-    margin: 0 -15px 0 0
     .modal_image
       display: flex
       justify-content: center
@@ -494,6 +503,171 @@ label:hover
   color: $blue_color
   background: rgba(0,0,0,0)
 
+#theme
+  display: none
+
+.switch-btn
+  width: 44px
+  height: 20px
+  background-color: #a8a6a6
+  border-radius: 50px
+  position: relative
+  display: flex
+  align-items: center
+  overflow: hidden
+  transition: background-color 150ms
+  margin: -18px 0 0 100px
+
+.switch-btn:after, .switch-btn:before
+  width: 19px
+  height: 19px
+  border-radius: 50%
+  position: absolute
+  display: flex
+  justify-content: center
+  align-items: center
+  transition: all 300ms cubic-bezier(0.18, 0.89, 0.35, 1.15)
+
+.switch-btn:before
+  left: -50%
+  content: ''
+  background-color: greenyellow
+  color: white
+
+.switch-btn:after
+  right: 2px
+  content: ''
+  background-color: rebeccapurple
+  color: white
+
+#theme:checked + .switch-btn:before
+  left: 2px
+
+#theme:checked + .switch-btn:after
+  right: -50%
+
+#theme:checked + .switch-btn
+ background-color: green
+
+
+
+.cartContainer_active
+  width: 440px
+  z-index: 99
+  position: absolute
+  box-shadow: 0 0 20px rgb(0 0 0 / 18%)
+  border-radius: 8px
+  border: none
+  top: 8%
+  left: 64%
+  background-color: #ffffff
+  .shoppingStatus
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    height: 115px
+    p
+      font-family: inherit
+      font-size: 19px
+      color: grey
+    h1
+      margin: 0 0 -11px 0
+  .itemInCart
+    display: flex
+    justify-content: space-around
+    height: 125px
+    border-bottom: 1px solid black
+    img
+      height: 100px
+      padding: 5px 5px 0 5px
+      margin: 9px 0 0 0
+    .nameAndPriceInfo
+      display: flex
+      flex-direction: column
+      justify-content: flex-start
+      align-items: center
+      h1
+        font-family: inherit
+        font-size: 18px
+      h4
+        font-family: inherit
+        color: #0E49B5
+        background-color: #dde4fa
+        border-radius: 8px
+        margin: -5px 0 0 0
+        padding: 3px 3px 3px 3px
+  .buttonsInCart
+    display: flex
+    align-items: center
+    h4
+      margin: 0 17px 0 0
+      font-size: 23px
+      color: #396553
+    .less, .more
+      margin: 0 19px 0 0
+      background-color: #0E49B5
+      color: white
+      text-decoration: none
+      display: inline-block
+      font-size: 19px
+      cursor: pointer
+      border: none
+    .delete
+      background-color: #ff2424
+      color: white
+      text-decoration: none
+      display: inline-block
+      font-size: 19px
+      cursor: pointer
+      border: none
+  .totalAmountAndTotalPrice
+    display: flex
+    justify-content: space-around
+    background-color: #dde4fa
+    p span
+      font-weight: bolder
+  .finishBuyWrapper
+    height: 100px
+    display: flex
+    justify-content: center
+    button
+      background-color: #0E49B5
+      border: none
+      border-radius: 8px
+      color: white
+      text-align: center
+      text-decoration: none
+      font-size: 28px
+      margin: 20px 0 20px 0
+      padding: 15px 32px
+      cursor: pointer
+      width: 66%
+
+.amountOfItems
+  max-height: 375px
+  overflow: auto
+
+.less_disabled
+  cursor: not-allowed
+  background-color: #e5e5e5
+  color: white
+
+.more_disabled
+  cursor: not-allowed
+  background-color: #e5e5e5
+  color: white
+  margin: 0 19px 0 0
+  text-decoration: none
+  display: inline-block
+  font-size: 19px
+  border: none
+
+.buttonCart span
+  font-size: 19px
+  margin: 0 0 0 -48px
+
+
 
 
 //actions
@@ -517,10 +691,6 @@ label:hover
 .back_to_top-show
   display: block
 
-
-
-
-
 .hidden
   position: absolute
   visibility: hidden
@@ -528,3 +698,16 @@ label:hover
 
 .img_rotate
   transform: rotate(90deg)
+
+.progressBar
+  height: 6px
+  width: 100%
+  position: fixed
+  z-index: 999
+  margin: -8px 0 0 -8px
+  .progress_line
+    height: 6px
+    background-color: $blue_color
+    width: 0px
+
+

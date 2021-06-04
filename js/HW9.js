@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
    const trackScroll = ()  => {
         let scrolled = window.pageYOffset;
-        let coord = document.documentElement.clientHeight * 4
+        let coord = document.documentElement.clientHeight * 2.5
 
      return scrolled >= coord ? goTopBtn.classList.add('back_to_top-show') : goTopBtn.classList.remove('back_to_top-show')
     }
@@ -116,5 +116,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
     window.addEventListener('scroll', trackScroll);
     goTopBtn.addEventListener('click', backToTop);
-
 
