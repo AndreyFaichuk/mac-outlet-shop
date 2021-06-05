@@ -18,7 +18,7 @@ for (let i = 0; i < newObjOfItems.length; i++) {
     if(newObjOfItems[i].display === null) newObjOfItems[i].display = 'none'
 }
 
-const cartTotal = {
+let cartTotal = {
     items: [],
     totalItems: 0,
     totalPrice: 0,
@@ -29,24 +29,19 @@ const totalPrice = document.querySelector('.totalAmountAndTotalPrice')
 const price = totalPrice.querySelector('p .price')
 const amount = totalPrice.querySelector('p span')
 
-
 price.innerText = `$0`
 amount.innerText = `0`
 title.innerText = `0`
 
+const getLocalStorage = JSON.parse(localStorage.getItem('items'))
 
-
-const getLocalStorage = function(){
-    return JSON.parse(localStorage.getItem('items'))
-}
 
 const setLocalStorage = function(){
     localStorage.setItem('items', JSON.stringify(cartTotal))
 }
 
-
-
 const addToCart = (item, classname) => {
+
     const itemIncart = cartTotal.items.find(itemInCart => itemInCart.id === item.id)
     if(!itemIncart){
         cartTotal.items.push ({
@@ -65,7 +60,6 @@ const addToCart = (item, classname) => {
         itemInCart(cartTotal)
     }
 
-
     const totalParams = cartTotal.items.reduce((accum, item) => {
 
         return {
@@ -81,7 +75,6 @@ const addToCart = (item, classname) => {
 
     itemInCart(cartTotal)
 }
-
 
 
 const itemInCart = (arr) =>{
@@ -116,8 +109,6 @@ const itemInCart = (arr) =>{
     const items = document.createElement('div')
     items.className = 'items'
 
-
-
     items.innerHTML += `
         <div class="itemInCart">
         <img src="${item.data.imgUrl}" alt="pic">
@@ -129,15 +120,11 @@ const itemInCart = (arr) =>{
     </div>
         `
 
-
-
-
     const buttonWraper = items.querySelector('.buttonsInCart')
     buttonWraper.append(lessButton)
     buttonWraper.append(totalAmount)
     buttonWraper.append(moreButton)
     buttonWraper.append(deleteButton)
-
 
     amountOfitemsWrapper.append(items)
 
@@ -156,18 +143,13 @@ const itemInCart = (arr) =>{
         deleteButton.addEventListener('click', () => {
             addToCart(item, 'delete')
         })
-
-
     })
-
-
 }
 
 
 const slider = item => {
     const slider = document.createElement('div')
     slider.className = 'slider'
-
 
     const sliderButton = document.createElement('button')
     sliderButton.className = 'button_top_ipad'
@@ -194,7 +176,6 @@ const slider = item => {
         showModal(item)
     }
 
-
     return slider
 
 }
@@ -207,7 +188,6 @@ const renderSlide = newObjOfItems => {
 }
 
 renderSlide(newObjOfItems)
-
 
 const showModal = data => {
     let progressBar = document.querySelector('.progressBar')
@@ -288,8 +268,6 @@ const showModal = data => {
 
     return modal
 }
-
-
 
 class Cards {
     constructor() {
@@ -389,8 +367,6 @@ class Cards {
 const view = new Cards()
 
 
-
-
 class FindService{
     #search = ''
     #os = []
@@ -399,8 +375,6 @@ class FindService{
     constructor() {
 
     }
-
-
 
     get search (){
         return this.#search
@@ -422,8 +396,6 @@ class FindService{
         }
             this.#colors.push(color)
             this.renderFilteredItems()
-
-
     }
 
     get os (){
@@ -506,7 +478,6 @@ class FindService{
     }
 
 }
-
 
 class Filters{
     constructor() {
@@ -707,7 +678,8 @@ function fillProgress() {
 }
 
 if(getLocalStorage){
-    let newItems = getLocalStorage()
+    let newItems = getLocalStorage
     itemInCart(newItems)
+    cartTotal = getLocalStorage
 }
 
